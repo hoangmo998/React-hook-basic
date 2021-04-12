@@ -7,7 +7,7 @@ ColorBox.propTypes = {
 
 function ColorBox() {
     const [color, setColor] = useState(() => {
-        const initColor = localStorage.getItem('box_color') || 'deepping';
+        const initColor = localStorage.getItem('box_color') || 'deeppink';
         console.log(initColor);
         return initColor;
 
@@ -32,7 +32,8 @@ function ColorBox() {
         }
         onClick = { handleBoxClick } >
         COLORBOX <
-        /div>
+        /
+        div >
     );
 }
 
