@@ -20,13 +20,9 @@ function TodoList(props) {
     };
     return ( 
     <div >
-        <ul className = "todo-list" > {
-            todos.map(todo => ( <li key = { todo.id }
-                onClick = {
-                    () => handleClick
-                } > { todo.title } </li>
-            ))
-        } </ul> 
+        <ul className = "todo-list" > { todos.map(todo => ( 
+            <li key = { todo.id } onClick = { () => handleClick } > { todo.title } </li>))} 
+        </ul> 
         </div >
     );
 }

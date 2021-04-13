@@ -4,7 +4,8 @@ import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 import PostList from './components/PostList';
 import Pagination from './components/Pagination';
-import queryString from 'query-string'
+import queryString from 'query-string';
+import PostFiltersForm from './components/PostFiltersForm'
 import './App.scss';
 
 function App() {
@@ -13,6 +14,27 @@ function App() {
         {id: 2,title: 'backend'},
         {id: 3,title: 'fullstack'}
     ]);
+    const people=[
+        "Siri",
+        "Alexa",
+        "Google",
+        "Facebook",
+        "Twitter",
+        "Linkedin",
+        "Sinkedin"
+    ];
+    const [searchTerm,setSearchTerm]=React.useState("");
+    const [searchResults,setSearchResults]=useState("");
+    const handleChange=event => {
+        setSearchTerm(event.target.value);
+    };
+    useEffect(() => {
+        const results = people.filter(person =>
+            person.toLowerCase().includes(searchTerm)
+        );
+        setSearchResults(results);
+    },[searchTerm]);
+
     //Example count 
     const [count,setCount]=useState(0);
     const [postList,setPostList]=useState([]);
@@ -21,24 +43,25 @@ function App() {
         _limit: 10,
         _totalRows: 1
     });
-    const [filters, setFilters] = useState({
+    const [filters,setFilters]=useState({
         _limit: 10,
         _page: 1,
+        title_like: '',
     })
     useEffect(() => {
         async function fetchPostList() {
-           try {
-               const paramsString = queryString.stringify(filters);
-            const requestUrl=`http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
-            const response=await fetch(requestUrl);
-            const responseJSON=await response.json();
-            console.log(responseJSON);
-            const {data, pagination}=responseJSON;
-            setPostList(data);
-            setPagination(pagination)
-           } catch (error) {
-               console.log('failed to fetch post list', error.message)
-           }
+            try {
+                const paramsString=queryString.stringify(filters);
+                const requestUrl=`http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
+                const response=await fetch(requestUrl);
+                const responseJSON=await response.json();
+                console.log(responseJSON);
+                const {data,pagination}=responseJSON;
+                setPostList(data);
+                setPagination(pagination)
+            } catch(error) {
+                console.log('failed to fetch post list',error.message)
+            }
         }
         console.log('todo list effect')
         fetchPostList();
@@ -70,7 +93,16 @@ function App() {
         }
         const newTodoList=[...todoList];
         newTodoList.push(newTodo);
-        setTodoList(newTodoList)
+        setTodoList(newTodoList);
+    };
+
+    function handleFiltersChange(newFilters) {
+        console.log('New Filters',newFilters);
+        setFilters({
+            ...filters,
+            _page: 1,
+            title_like: newFilters.searchTerm
+        })
     }
     return (
         <div className="app" >
@@ -80,12 +112,24 @@ function App() {
             <button onClick={
                 () => setCount(count+1)
             } > Click me </button>
-            <h1> Welcome to React Hook </h1> 
+            <h1> Welcome to React Hook </h1>
             <ColorBox />
-            <TodoList todos={todoList} onTodoClick={handleTodoClick}/> 
-            <TodoForm onSubmit={handleTodoFormSubmit}/> 
-            <PostList posts={postList}/> 
-            <Pagination pagination={pagination} onPageChange={handlePageChange}/> 
+            <TodoList todos={todoList} onTodoClick={handleTodoClick} />
+            <TodoForm onSubmit={handleTodoFormSubmit} />
+            <PostList posts={postList} />
+            <Pagination pagination={pagination} onPageChange={handlePageChange} />
+            <PostFiltersForm onSubmit={handleFiltersChange} />
+            <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleChange}
+            />
+            <ul>
+                {searchResults.map(item => (
+                    <li>{item}</li>
+                ))}
+            </ul>
         </div>
     );
 }

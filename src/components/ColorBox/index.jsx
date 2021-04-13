@@ -25,15 +25,10 @@ function ColorBox() {
         setColor(newColor);
         localStorage.setItem('box_color', newColor);
     }
-    return ( <
-        div className = "color-box"
-        style = {
-            { backgroundColor: color }
-        }
-        onClick = { handleBoxClick } >
-        COLORBOX <
-        /
-        div >
+    return ( 
+        <div className = "color-box" style = {{ backgroundColor: color }} onClick = { handleBoxClick }>
+        COLORBOX 
+        </div>
     );
 }
 

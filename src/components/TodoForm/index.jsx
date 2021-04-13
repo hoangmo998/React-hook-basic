@@ -29,16 +29,10 @@ function TodoForm(props) {
         //reset form
         setValue('');
     }
-    return ( <
-        form onSubmit = { handleSubmit } >
-        <
-        input type = "text"
-        value = { value }
-        onChange = { handleValueChange }
-        />
-
-        <
-        /form>
+    return ( 
+        <form onSubmit = { handleSubmit } >
+        <input type = "text" value = { value } onChange = { handleValueChange }/>
+        </form>
     );
 }
 
