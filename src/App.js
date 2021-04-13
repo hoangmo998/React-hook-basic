@@ -1,11 +1,14 @@
 import React,{useEffect,useState} from "react";
+import Navbar from './components/Navbar';
+import Todos from './components/Todo'
 import ColorBox from './components/ColorBox';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 import PostList from './components/PostList';
 import Pagination from './components/Pagination';
 import queryString from 'query-string';
-import PostFiltersForm from './components/PostFiltersForm'
+import PostFiltersForm from './components/PostFiltersForm';
+import ThemeContextProvider from './contexts/ThemeContext'
 import './App.scss';
 
 function App() {
@@ -24,7 +27,7 @@ function App() {
         "Sinkedin"
     ];
     const [searchTerm,setSearchTerm]=React.useState("");
-    const [searchResults,setSearchResults]=useState("");
+    const [searchResults,setSearchResults] = useState([]);
     const handleChange=event => {
         setSearchTerm(event.target.value);
     };
@@ -106,6 +109,8 @@ function App() {
     }
     return (
         <div className="app" >
+            <Navbar></Navbar>
+            <Todos />
             <h1> React Hook PostList </h1>
             <p> You click {count}
                 times </p>
@@ -113,12 +118,6 @@ function App() {
                 () => setCount(count+1)
             } > Click me </button>
             <h1> Welcome to React Hook </h1>
-            <ColorBox />
-            <TodoList todos={todoList} onTodoClick={handleTodoClick} />
-            <TodoForm onSubmit={handleTodoFormSubmit} />
-            <PostList posts={postList} />
-            <Pagination pagination={pagination} onPageChange={handlePageChange} />
-            <PostFiltersForm onSubmit={handleFiltersChange} />
             <input
                 type="text"
                 placeholder="Search"
@@ -130,6 +129,17 @@ function App() {
                     <li>{item}</li>
                 ))}
             </ul>
+            <ColorBox />
+          
+            <ThemeContextProvider>
+
+            <TodoList todos={todoList} onTodoClick={handleTodoClick} />
+            <TodoForm onSubmit={handleTodoFormSubmit} />
+            <PostList posts={postList} />
+            <Pagination pagination={pagination} onPageChange={handlePageChange} />
+            <PostFiltersForm onSubmit={handleFiltersChange} />
+
+            </ThemeContextProvider>
         </div>
     );
 }

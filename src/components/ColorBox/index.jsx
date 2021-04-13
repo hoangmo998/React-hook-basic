@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
+import {ThemeContext} from "../../contexts/ThemeContext"
 import './ColorBox.scss';
 
 ColorBox.propTypes = {
@@ -12,6 +13,9 @@ function ColorBox() {
         return initColor;
 
     });
+    //context
+    const testContext = useContext(ThemeContext)
+    console.log(testContext)
 
     function getRandomColor() {
         const COLOR_LIST = ['deeppink', 'green', 'yellow', 'black', 'blue']
