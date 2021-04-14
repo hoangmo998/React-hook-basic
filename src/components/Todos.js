@@ -19,7 +19,7 @@ const Todos = () => {
                      ))
                  }
              </ul>
-            ) : <p style= {{textAlign: 'center'}}>Đăng nhập vào đi pls !!!!!!!</p>}
+            ) : <p style= {{textAlign: 'center'}}>Đăng nhập vào đi con gà này pls !!!!!!!</p>}
            
         </div>
     )
