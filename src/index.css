@@ -13,7 +13,16 @@ body {
   width: 90%;
   max-width: 800px;
 }
-
+.App-header.ul {
+  display: flex;
+  flex-direction: row;
+}
+.App-header.li {
+  width: 200px;
+  list-style-type: none;
+  border: 1px solid gray;
+  padding: 5px
+}
 .navbar {
   padding: 5px;
   text-align: center;

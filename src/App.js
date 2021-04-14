@@ -4,9 +4,30 @@ import ThemeContextProvider from './contexts/ThemeContext';
 import TodoContextProvider from './contexts/TodoContext'
 import ThemeToggle from './components/ThemeToggle';
 import AuthContextProvider from './contexts/AuthContext'
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+import Home from './pages/Home';
+import Users from './pages/Users'
 function App() {
   return (
     <div className="App">
+      <Router>
+        <header className="App-header">
+          <ul>
+            <li>
+              <Link to="/">Home Router</Link>
+            </li>
+            <li>
+              <Link to="/users" >Users Router</Link>
+            </li>
+          </ul>
+          <div>
+            <Switch>
+              <Route exact path='/' component={Home}/>
+              <Route exact path='/users' component={Users} />
+            </Switch>
+          </div>
+        </header>
+      </Router>
       <ThemeContextProvider>
         <AuthContextProvider>
           <Navbar />
@@ -14,7 +35,6 @@ function App() {
             <Todos />
           </TodoContextProvider>
         </AuthContextProvider>
-
         <ThemeToggle />
       </ThemeContextProvider>
     </div>
