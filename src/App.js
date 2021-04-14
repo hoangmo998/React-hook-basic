@@ -3,18 +3,20 @@ import Todos from './components/Todos';
 import ThemeContextProvider from './contexts/ThemeContext';
 import TodoContextProvider from './contexts/TodoContext'
 import ThemeToggle from './components/ThemeToggle';
+import AuthContextProvider from './contexts/AuthContext'
 function App() {
   return (
     <div className="App">
       <ThemeContextProvider>
-     <Navbar />
-     <TodoContextProvider>
-     <Todos />
-     </TodoContextProvider>
-  
-     <ThemeToggle />
+        <AuthContextProvider>
+          <Navbar />
+          <TodoContextProvider>
+            <Todos />
+          </TodoContextProvider>
+        </AuthContextProvider>
 
-     </ThemeContextProvider>
+        <ThemeToggle />
+      </ThemeContextProvider>
     </div>
   );
 }
