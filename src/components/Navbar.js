@@ -2,6 +2,7 @@ import React,{useContext} from 'react';
 import {ThemeContext} from '../contexts/ThemeContext';
 import {AuthContext} from '../contexts/AuthContext'
 import {TOGGLE_AUTH} from '../reducers/types';
+
 const Navbar=() => {
     //Load theme context
     const {theme}=useContext(ThemeContext);
