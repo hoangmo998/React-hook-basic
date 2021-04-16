@@ -7,7 +7,7 @@ const People=(props) => {
             <div className="col">
                 <h2>People: </h2>          
                 {props.people.map((p) => (
-                    <div key={Math.random()*1000000000}>
+                    <div key={p}>
                         <p>
                             {p.firstName} {p.lastName}
                         </p>

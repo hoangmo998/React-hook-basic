@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PeopleCount = () => {
+const PeopleCount = (props) => {
     return (
         <div>
             <h2 className='text-center'>{props.peopleCount}</h2>.

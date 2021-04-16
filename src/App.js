@@ -8,10 +8,12 @@ import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 import Home from './pages/Home';
 import Users from './pages/Users';
 import About from './pages/About';
-import React,{useState} from 'react';
+import React,{useState, useReducer} from 'react';
 import Form from './components/Form';
 import People from './components/People';
-import NewestPerson from './components/NewestPerson'
+import NewestPerson from './components/NewestPerson';
+import PeopleContext from './contexts/peopleContext';
+import peopleReducer from './contexts/peopleReducer'
 function App() {
   const [people,setPeople]=useState([
     {

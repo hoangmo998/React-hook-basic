@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import PeopleCount from './People'
+import PeopleCount from './PeopleCount'
 const NewestPerson = ({newestPerson, peopleCount}) => {
     useEffect(() => {
         const newestPersonName = `${newestPerson.firstName} ${newestPerson.lastName}`;
